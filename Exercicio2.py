@@ -1,13 +1,11 @@
-nota = int(input ("Escreva a sua nota:"))
+nota = int(input("Escreva a sua nota: "))
 
-if nota >= 90:
-    print("Excelente")
-
-elif nota >= 70:
-    print("Bom")
-
-elif nota >= 50:
-    print("Suficiente")
-
-elif nota <= 50:
-    print("Insuficiente")
+match nota:
+    case n if n >= 90:
+        print("Excelente")
+    case n if n >= 70:
+        print("Bom")
+    case n if n >= 50:
+        print("Suficiente")
+    case _:
+        print("Insuficiente")
