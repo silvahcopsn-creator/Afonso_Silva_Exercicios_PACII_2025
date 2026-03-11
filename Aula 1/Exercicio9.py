@@ -1,6 +1,5 @@
 def processar_requisicao(req):
     match req:
-        # GET
         case {"metodo": "GET", "conteudo": _}:
             return "Requisição GET recebida"
 
