@@ -1,3 +1,6 @@
+# Afonso Silva Exercicios PAC- 2025140271
+
+
 import json
 import re
 
