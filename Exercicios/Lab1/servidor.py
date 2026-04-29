@@ -21,6 +21,7 @@ def cliente_thread(conn, addr):
     nome = conn.recv(1024).decode()
     clientes.append(conn)
 
+    print(nome, "ligou-se")
     broadcast(nome + " entrou no chat", conn)
 
     while True:
@@ -34,6 +35,11 @@ def cliente_thread(conn, addr):
 
             if dados:
                 conn.send("Mensagem bloqueada (dados pessoais)".encode())
+                with open("gdpr_logs.txt", "a") as f:
+                    f.write(nome + ": " + msg + "\n")
+
+                print("Mensagem bloqueada de", nome)
+
                 continue
 
             broadcast(nome + ": " + msg, conn)
@@ -43,6 +49,7 @@ def cliente_thread(conn, addr):
 
     clientes.remove(conn)
     broadcast(nome + " saiu do chat", conn)
+    print(nome, "saiu")
     conn.close()
 
 def main():
@@ -56,4 +63,4 @@ def main():
         conn, addr = server.accept()
         threading.Thread(target=cliente_thread, args=(conn, addr)).start()
 
-main()  
+main()
